@@ -1,0 +1,185 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title>IPP Admin Selenium Builder</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+
+
+    <style>
+
+        textarea { width:100%;height: 300px;}
+    </style>
+
+
+</head>
+
+<body>
+
+<!-- Fixed navbar -->
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">IPP Admin Selenium Builder</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Nav header</li>
+                        <li><a href="#">Separated link</a></li>
+                        <li><a href="#">One more separated link</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="../navbar/">Default</a></li>
+                <li><a href="../navbar-static-top/">Static top</a></li>
+                <li class="active"><a href="./">Fixed top <span class="sr-only">(current)</span></a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- Main component for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        <h2>IPP Admin Selenium Builder</h2>
+        <p>Select and paste all the used cells from the Gradebuilder export (Excel).</p>
+        <p>
+
+            <textarea id="input_str"></textarea>
+        </p>
+        <p>
+            <a class="btn btn-lg btn-primary" href="javascript:void(0);" role="button" id="input_str_process">Process! &raquo;</a>
+        </p>
+    </div>
+
+    <div class="jumbotron" style="display:none; " id="results_container">
+
+               <textarea id="results_content"></textarea>
+    </div>
+
+</div> <!-- /container -->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/CSVToArray.js"></script>
+<script src="js/jsSeleniumBuilder.js"></script>
+
+
+
+
+<script>
+    //bind click to process input text from textarea
+    $('#input_str_process').click(function(){
+
+        var str = $('#input_str').val();
+        if(!str.length){
+            alert('Please paste the Grade Builder Export columns first!');
+            return false;
+        }
+        var str_arr = CSVToArray(str);
+
+        $('#results_container').hide();
+
+        // create Selenium String for pasting
+        var finalSeleniumString = createSS(str_arr,config);
+
+        if(finalSeleniumString){
+            $('#results_content').val(finalSeleniumString);
+            $('#results_container').show();
+        }
+
+    });
+
+
+    //baseline configs for the Gradebuilder export columns
+    var config = {};
+    config.reqcols = 6;
+    config.reqcolnames = [];
+    config.reqcolnames[0] =  'Resource';
+    config.reqcolnames[1] =  'Object ID';
+    config.reqcolnames[2] =  'Contribution';
+    config.reqcolnames[3] =  'Extra Credit';
+    config.reqcolnames[4] =  'Term';
+    config.reqcolnames[5] =  'Honors';
+
+
+     // construct the specific html table needed to paste into selenium
+    function createSS(str_arr,config_obj){
+        //alert(str_arr[0].length);
+        // basic validation: x columns pasted, first row needs to be there
+        var finalSeleniumString = '';
+        if(str_arr[0].length != config_obj.reqcols){
+
+           alert('expected '+config_obj.reqcols+' columns copied from the Educator Grade Builder Export');
+           return false;
+        }
+        if(  str_arr[0][0] != config_obj.reqcolnames[0]
+            ||
+            str_arr[0][1] != config_obj.reqcolnames[1]
+            ||
+            str_arr[0][2] != config_obj.reqcolnames[2]
+            ||
+            str_arr[0][3] != config_obj.reqcolnames[3]
+            ||
+            str_arr[0][4] != config_obj.reqcolnames[4]
+            ||
+            str_arr[0][5] != config_obj.reqcolnames[5] ){
+            alert('row with column names required, please');
+            return false;
+        }  //Resource	Object ID	Contribution	Extra Credit	Term	Honors
+
+        for(i=1; i < str_arr.length; i++){
+
+            // each page entry is iterated here
+            finalSeleniumString += jsSeleniumBuilder.makeCommand('pause','1000','') + '\n';
+            finalSeleniumString += jsSeleniumBuilder.makeCommand('click','id=ctl03_BaseSelectionDetail1_BaseButtonAdd','') + '\n';
+            finalSeleniumString += jsSeleniumBuilder.makeCommand('pause','1000','') + '\n';
+            finalSeleniumString += jsSeleniumBuilder.makeCommand('type','id=ctl03_BaseSelectionDetail1_ctl01_BaseTextBoxDescription',str_arr[i][0]) + '\n';
+            finalSeleniumString += jsSeleniumBuilder.makeCommand('type','id=ctl03_BaseSelectionDetail1_ctl01_BaseTextBoxMinutes',str_arr[i][2]) + '\n';
+            finalSeleniumString += jsSeleniumBuilder.makeCommand('type','id=ctl03_BaseSelectionDetail1_ctl01_BaseTextBoxSegment',str_arr[i][4]) + '\n';
+            finalSeleniumString += jsSeleniumBuilder.makeCommand('click','id=ctl03_BaseSelectionDetail1_BaseButtonSave','') + '\n';
+
+        }
+        //console.log(finalSeleniumString);
+        return finalSeleniumString;
+
+
+    }
+
+
+
+</script>
+</body>
+</html>
