@@ -65,6 +65,7 @@
         <p>
             <a class="btn btn-lg btn-info" href="javascript:void(0);" role="button" id="input_str_preview">Preview &raquo;</a>
             <a class="btn btn-lg btn-primary" href="javascript:void(0);" role="button" id="input_str_process">Process! &raquo;</a>
+            <input type="checkbox" id="ignore_honors_cbx"> Ignore Honors?
         </p>
     </div>
 
@@ -106,7 +107,7 @@
     config.reqcolnames[5] =  'Honors';
     config.reqcolnames[6] =  'Minutes';
 
-    var str = $('#input_str').val();
+
 
     //bind click to process input text from textarea
     $('#input_str_process').click(function(){

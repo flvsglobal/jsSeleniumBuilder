@@ -3,20 +3,24 @@ function createSS(str_arr,config_obj){
     //alert(str_arr[0].length);
     // basic validation: x columns pasted, first row needs to be there
     var finalSeleniumString = '';
+    var ignoreHonorsBool = $('#ignore_honors_cbx').prop('checked');
 
     //validate!
     if(!validateStrArr(str_arr,config_obj)){ return false;}
 
     for(i=1; i < str_arr.length; i++){
 
-        // each page entry is iterated here
-        finalSeleniumString += jsSeleniumBuilder.makeCommand('pause','1000','') + '\n';
-        finalSeleniumString += jsSeleniumBuilder.makeCommand('click','id=ctl03_BaseSelectionDetail1_BaseButtonAdd','') + '\n';
-        finalSeleniumString += jsSeleniumBuilder.makeCommand('pause','1000','') + '\n';
-        finalSeleniumString += jsSeleniumBuilder.makeCommand('type','id=ctl03_BaseSelectionDetail1_ctl01_BaseTextBoxDescription',str_arr[i][0]) + '\n';
-        finalSeleniumString += jsSeleniumBuilder.makeCommand('type','id=ctl03_BaseSelectionDetail1_ctl01_BaseTextBoxMinutes',str_arr[i][6]) + '\n';
-        finalSeleniumString += jsSeleniumBuilder.makeCommand('type','id=ctl03_BaseSelectionDetail1_ctl01_BaseTextBoxSegment',str_arr[i][4]) + '\n';
-        finalSeleniumString += jsSeleniumBuilder.makeCommand('click','id=ctl03_BaseSelectionDetail1_BaseButtonSave','') + '\n';
+        if(ignoreHonorsBool && str_arr[i][5] == 1){   // bypass record if it's honors and the checkbox to ignore is checked
+        } else {
+            // each page entry is iterated here
+            finalSeleniumString += jsSeleniumBuilder.makeCommand('pause','1000','') + '\n';
+            finalSeleniumString += jsSeleniumBuilder.makeCommand('click','id=ctl03_BaseSelectionDetail1_BaseButtonAdd','') + '\n';
+            finalSeleniumString += jsSeleniumBuilder.makeCommand('pause','1000','') + '\n';
+            finalSeleniumString += jsSeleniumBuilder.makeCommand('type','id=ctl03_BaseSelectionDetail1_ctl01_BaseTextBoxDescription',str_arr[i][0]) + '\n';
+            finalSeleniumString += jsSeleniumBuilder.makeCommand('type','id=ctl03_BaseSelectionDetail1_ctl01_BaseTextBoxMinutes',str_arr[i][6]) + '\n';
+            finalSeleniumString += jsSeleniumBuilder.makeCommand('type','id=ctl03_BaseSelectionDetail1_ctl01_BaseTextBoxSegment',str_arr[i][4]) + '\n';
+            finalSeleniumString += jsSeleniumBuilder.makeCommand('click','id=ctl03_BaseSelectionDetail1_BaseButtonSave','') + '\n';
+        }
 
     }
     //console.log(finalSeleniumString);
@@ -28,16 +32,26 @@ function createSS(str_arr,config_obj){
 function createSSPreview(str_arr,config_obj){
 
     var seleniumPreviewTable = '<table class="table table-bordered"><tr><th>Lesson Number/Name</th><th>Segment</th><th>Minutes</th></tr> \n';
+    var ignoreHonorsBool = $('#ignore_honors_cbx').prop('checked');
     //validate!
     if(!validateStrArr(str_arr,config_obj)){ return false;}
     for(i=1; i < str_arr.length; i++){
 
+        console.log(str_arr[i][0]);
+        console.log(str_arr[i][1]);
+        console.log(str_arr[i][2]);
+        console.log(str_arr[i][3]);
+        console.log(str_arr[i][4]);
+        console.log(str_arr[i][5] +':'+ (ignoreHonorsBool && str_arr[i][5] == 1));
+        console.log(str_arr[i][6]);
+        console.log('--------------------------');
         // each page entry is iterated here
-
-        seleniumPreviewTable += '<tr><td>' + str_arr[i][0] + '</td>';
-        seleniumPreviewTable += '<td>' + str_arr[i][4] + '</td>';
-        seleniumPreviewTable += '<td>' + str_arr[i][6] + '</td></tr>\n';
-
+        if(ignoreHonorsBool && str_arr[i][5] == 1){   // bypass record if it's honors and the checkbox to ignore is checked
+        } else {
+            seleniumPreviewTable += '<tr><td>' + str_arr[i][0] + '</td>';
+            seleniumPreviewTable += '<td>' + str_arr[i][4] + '</td>';
+            seleniumPreviewTable += '<td>' + str_arr[i][6] + '</td></tr>\n';
+        }
 
     }
     seleniumPreviewTable += '</table>';
