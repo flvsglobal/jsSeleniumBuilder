@@ -2,13 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0557b4e7-2e82-4561-b0ee-8e9b6b3669cf" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/gradebuilderSelenium.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="JS Selenium Builder.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/index.html" changelist="0557b4e7-2e82-4561-b0ee-8e9b6b3669cf" time="1417567844510" ignored="false" />
+    <file path="/index.html" changelist="0557b4e7-2e82-4561-b0ee-8e9b6b3669cf" time="1417616707404" ignored="false" />
     <file path="/jsSeleniumBuilder.js" changelist="0557b4e7-2e82-4561-b0ee-8e9b6b3669cf" time="1417550431721" ignored="false" />
     <file path="/Dummy.txt" changelist="0557b4e7-2e82-4561-b0ee-8e9b6b3669cf" time="1417563053425" ignored="false" />
     <file path="/gradebuilderSelenium.js" changelist="0557b4e7-2e82-4561-b0ee-8e9b6b3669cf" time="1417565250994" ignored="false" />
@@ -40,10 +38,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="index.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="115" column="57" selection-start="4159" selection-end="4159" vertical-scroll-proportion="2.25">
+            <state line="65" column="41" selection-start="2023" selection-end="2023" vertical-scroll-proportion="0.443038">
               <folding>
                 <element signature="n#style#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -52,10 +50,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="gradebuilderSelenium.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="gradebuilderSelenium.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/gradebuilderSelenium.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="127" selection-start="1290" selection-end="1290" vertical-scroll-proportion="0.40816328">
+            <state line="20" column="127" selection-start="1290" selection-end="1290" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -94,8 +92,8 @@
         <option value="$PROJECT_DIR$/js/CSVToArray.js" />
         <option value="$PROJECT_DIR$/jsSeleniumBuilder.js" />
         <option value="$PROJECT_DIR$/js/jsSeleniumBuilder.js" />
-        <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/js/gradebuilderSelenium.js" />
+        <option value="$PROJECT_DIR$/index.html" />
       </list>
     </option>
   </component>
@@ -354,20 +352,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/js/gradebuilderSelenium.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="127" selection-start="1290" selection-end="1290" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="115" column="57" selection-start="4159" selection-end="4159" vertical-scroll-proportion="2.25">
+        <state line="65" column="41" selection-start="2023" selection-end="2023" vertical-scroll-proportion="0.443038">
           <folding>
             <element signature="n#style#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/gradebuilderSelenium.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="127" selection-start="1290" selection-end="1290" vertical-scroll-proportion="0.40816328">
-          <folding />
         </state>
       </provider>
     </entry>
