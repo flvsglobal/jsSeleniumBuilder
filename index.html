@@ -76,10 +76,15 @@
             <textarea id="input_str"></textarea>
         </p>
         <p>
+            <a class="btn btn-lg" href="javascript:void(0);" role="button" id="input_str_preview">Preview &raquo;</a>
             <a class="btn btn-lg btn-primary" href="javascript:void(0);" role="button" id="input_str_process">Process! &raquo;</a>
         </p>
     </div>
 
+    <div class="jumbotron" style="display:none; " id="results_preview">
+
+
+    </div>
     <div class="jumbotron" style="display:none; " id="results_container">
 
                <textarea id="results_content"></textarea>
@@ -95,11 +100,27 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/CSVToArray.js"></script>
 <script src="js/jsSeleniumBuilder.js"></script>
+<script src="js/gradebuilderSelenium.js"></script>
+
 
 
 
 
 <script>
+    //baseline configs for the Gradebuilder export columns
+    var config = {};
+    config.reqcols = 7;
+    config.reqcolnames = [];
+    config.reqcolnames[0] =  'Resource';
+    config.reqcolnames[1] =  'Object ID';
+    config.reqcolnames[2] =  'Contribution';
+    config.reqcolnames[3] =  'Extra Credit';
+    config.reqcolnames[4] =  'Term';
+    config.reqcolnames[5] =  'Honors';
+    config.reqcolnames[6] =  'Minutes';
+
+    var str = $('#input_str').val();
+
     //bind click to process input text from textarea
     $('#input_str_process').click(function(){
 
@@ -110,73 +131,42 @@
         }
         var str_arr = CSVToArray(str);
 
-        $('#results_container').hide();
+
 
         // create Selenium String for pasting
         var finalSeleniumString = createSS(str_arr,config);
 
         if(finalSeleniumString){
+            $('#results_preview').hide();
+            $('#results_container').hide();
             $('#results_content').val(finalSeleniumString);
             $('#results_container').show();
         }
 
     });
+    $('#input_str_preview').click(function(){
 
-
-    //baseline configs for the Gradebuilder export columns
-    var config = {};
-    config.reqcols = 6;
-    config.reqcolnames = [];
-    config.reqcolnames[0] =  'Resource';
-    config.reqcolnames[1] =  'Object ID';
-    config.reqcolnames[2] =  'Contribution';
-    config.reqcolnames[3] =  'Extra Credit';
-    config.reqcolnames[4] =  'Term';
-    config.reqcolnames[5] =  'Honors';
-
-
-     // construct the specific html table needed to paste into selenium
-    function createSS(str_arr,config_obj){
-        //alert(str_arr[0].length);
-        // basic validation: x columns pasted, first row needs to be there
-        var finalSeleniumString = '';
-        if(str_arr[0].length != config_obj.reqcols){
-
-           alert('expected '+config_obj.reqcols+' columns copied from the Educator Grade Builder Export');
-           return false;
-        }
-        if(  str_arr[0][0] != config_obj.reqcolnames[0]
-            ||
-            str_arr[0][1] != config_obj.reqcolnames[1]
-            ||
-            str_arr[0][2] != config_obj.reqcolnames[2]
-            ||
-            str_arr[0][3] != config_obj.reqcolnames[3]
-            ||
-            str_arr[0][4] != config_obj.reqcolnames[4]
-            ||
-            str_arr[0][5] != config_obj.reqcolnames[5] ){
-            alert('row with column names required, please');
+        var str = $('#input_str').val();
+        if(!str.length){
+            alert('Please paste the Grade Builder Export columns first!');
             return false;
-        }  //Resource	Object ID	Contribution	Extra Credit	Term	Honors
-
-        for(i=1; i < str_arr.length; i++){
-
-            // each page entry is iterated here
-            finalSeleniumString += jsSeleniumBuilder.makeCommand('pause','1000','') + '\n';
-            finalSeleniumString += jsSeleniumBuilder.makeCommand('click','id=ctl03_BaseSelectionDetail1_BaseButtonAdd','') + '\n';
-            finalSeleniumString += jsSeleniumBuilder.makeCommand('pause','1000','') + '\n';
-            finalSeleniumString += jsSeleniumBuilder.makeCommand('type','id=ctl03_BaseSelectionDetail1_ctl01_BaseTextBoxDescription',str_arr[i][0]) + '\n';
-            finalSeleniumString += jsSeleniumBuilder.makeCommand('type','id=ctl03_BaseSelectionDetail1_ctl01_BaseTextBoxMinutes',str_arr[i][2]) + '\n';
-            finalSeleniumString += jsSeleniumBuilder.makeCommand('type','id=ctl03_BaseSelectionDetail1_ctl01_BaseTextBoxSegment',str_arr[i][4]) + '\n';
-            finalSeleniumString += jsSeleniumBuilder.makeCommand('click','id=ctl03_BaseSelectionDetail1_BaseButtonSave','') + '\n';
-
         }
-        //console.log(finalSeleniumString);
-        return finalSeleniumString;
+        var str_arr = CSVToArray(str);
+
+        $('#results_container').hide();
+
+        // create Preview String
+        var previewTable = createSSPreview(str_arr,config);
+
+        if(previewTable){
+            $('#results_container').hide();
+            $('#results_preview').html(previewTable);
+            $('#results_preview').show();
+        }
+
+    });
 
 
-    }
 
 
 
