@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title>IPP Admin Selenium Builder</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+
+
+</head>
+
+<body>
+
+<!-- Fixed navbar -->
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">IPP Admin Selenium Builder</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="howto.html">How To Use This</a></li>
+
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="active"><a href="mailto:gmeyer@flvs.net">Email</a></li>
+
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- Main component for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        <h2>IPP Admin Selenium Builder: How To</h2>
+
+
+
+
+            <p>HTML5/CSS3/Javascript tool that takes exported Educator grade builder Excel columns and converts rows into Selenium automation code</p>
+
+            <p>REQUIREMENTS:</p>
+
+            <p>Firefox, Selenium IDE plugin for Firefox, IPP Admin account, Educator Master Manager access</p>
+
+            <p>INSTALLATION:</p>
+
+            <p>1) Download source or zip file. If you downloaded the zip file, simply unzip into a folder on your computer.
+                You need a modern browser. This has been tested on Chrome, Firefox, and Safari and should work on IE 10 or newer.
+                Since Firefox is the browser of choice for Selenium IDE, this browser is highly recommended.</p>
+
+            <p>1B) If you are savvy with Git you may simply clone this repository onto your computer. Updates are then handled by performing a pull.</p>
+
+            <p>2) Choose a folder to keep the unzipped files. The folder structure should be left as-is.</p>
+
+            <p>EDUCATOR MASTER MANAGER / BROWSER / EXCEL:</p>
+
+            <p>3) Open the index.html file with your browser.</p>
+
+            <p>4) Locate the target course in Master Manager and select the Gradebook link on the left navigation area.</p>
+
+            <p>5) Select the Grade Builder link that appears under the Gradebook on the left navigation area.</p>
+
+            <p>6) Scroll down to the bottom of the Grade Builder page on the right and click 'Export Grade Builder' to download the Excel file.</p>
+
+            <p>7) Click the Lessons link on the left navigation area to show the course lessons site.</p>
+
+            <p>8) Open the Excel file and add a new column header to the right of 'Honors' and name it 'Minutes' (no quotes please).</p>
+
+            <p>9) Locate the pace charts for each module in the first page of each module in the course lessons site.</p>
+
+            <p>10) Enter the corresponding minutes into each cell in the Excel sheet under the Minutes header until complete.</p>
+
+            <p>11) Select columns A-G, including the header cells for all populated rows and copy.</p>
+
+            <p>12) Open the jsSeleniumBuilder page in your browser and paste into the text area.</p>
+
+            <p>13) To preview what will be entered into the IPP Admin, simply click the 'Preview!' button.</p>
+
+            <p>14) To process the pasted text into Selenium code, click the 'Process!' button.</p>
+
+            <p>15) Processed Selenium code will display in a text area. Select all text in this text area and copy.</p>
+
+            <p>SELENIUM IDE / FIREFOX:</p>
+
+            <p>16) Open Firefox and login to the IPP Admin.</p>
+
+            <p>17) Navigate to the Course Modules page and select the Course and Version in the select boxes.</p>
+
+            <p>18) Open Selenium IDE and enter the source tab in the editor.</p>
+
+            <p>19) Paste the copied code text from the jsSeleniumBuilder page.</p>
+
+            <p>20) Run the workflow. You'll see entries occur in 1 second intervals until all entries have been added.</p>
+
+    </div>
+
+    <div class="jumbotron" style="display:none; " id="results_preview">
+
+
+    </div>
+    <div class="jumbotron" style="display:none; " id="results_container">
+
+        <textarea id="results_content"></textarea>
+    </div>
+
+</div> <!-- /container -->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+
+
+</body>
+</html>
