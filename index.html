@@ -97,15 +97,11 @@
 <script>
     //baseline configs for the Gradebuilder export columns
     var config = {};
-    config.reqcols = 7;
+    config.reqcols = 3;
     config.reqcolnames = [];
-    config.reqcolnames[0] =  'Resource';
-    config.reqcolnames[1] =  'Object ID';
-    config.reqcolnames[2] =  'Contribution';
-    config.reqcolnames[3] =  'Extra Credit';
-    config.reqcolnames[4] =  'Term';
-    config.reqcolnames[5] =  'Honors';
-    config.reqcolnames[6] =  'Minutes';
+    config.reqcolnames[0] =  'Lesson Number/Name';
+    config.reqcolnames[1] =  'Segment';
+    config.reqcolnames[2] =  'Minutes';
 
 
 
@@ -129,6 +125,7 @@
             $('#results_container').hide();
             $('#results_content').val(finalSeleniumString);
             $('#results_container').show();
+            $('#input_str').val('')
         }
 
     });

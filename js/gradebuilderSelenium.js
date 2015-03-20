@@ -17,8 +17,8 @@ function createSS(str_arr,config_obj){
             finalSeleniumString += jsSeleniumBuilder.makeCommand('click','id=ctl03_BaseSelectionDetail1_BaseButtonAdd','') + '\n';
             finalSeleniumString += jsSeleniumBuilder.makeCommand('waitForValue','id=ctl03_BaseSelectionDetail1_ctl01_BaseTextBoxSegment','0') + '\n';
             finalSeleniumString += jsSeleniumBuilder.makeCommand('type','id=ctl03_BaseSelectionDetail1_ctl01_BaseTextBoxDescription',str_arr[i][0]) + '\n';
-            finalSeleniumString += jsSeleniumBuilder.makeCommand('type','id=ctl03_BaseSelectionDetail1_ctl01_BaseTextBoxMinutes',str_arr[i][6]) + '\n';
-            finalSeleniumString += jsSeleniumBuilder.makeCommand('type','id=ctl03_BaseSelectionDetail1_ctl01_BaseTextBoxSegment',str_arr[i][4]) + '\n';
+            finalSeleniumString += jsSeleniumBuilder.makeCommand('type','id=ctl03_BaseSelectionDetail1_ctl01_BaseTextBoxMinutes',str_arr[i][2]) + '\n';
+            finalSeleniumString += jsSeleniumBuilder.makeCommand('type','id=ctl03_BaseSelectionDetail1_ctl01_BaseTextBoxSegment',str_arr[i][1]) + '\n';
             finalSeleniumString += jsSeleniumBuilder.makeCommand('click','id=ctl03_BaseSelectionDetail1_BaseButtonSave','') + '\n';
             finalSeleniumString += jsSeleniumBuilder.makeCommand('waitForVisible','id=ctl03_BaseSelectionDetail1_baseValidationSummary','') + '';
 
@@ -33,7 +33,7 @@ function createSS(str_arr,config_obj){
 
 function createSSPreview(str_arr,config_obj){
 
-    var seleniumPreviewTable = '<table class="table table-bordered"><tr><th>Lesson Number/Name</th><th>Segment</th><th>Minutes</th></tr> \n';
+    var seleniumPreviewTable = '<table class="table table-bordered"><tr><th>'+config_obj.reqcolnames[0]+'</th><th>'+config_obj.reqcolnames[1]+'</th><th>'+config_obj.reqcolnames[2]+'</th></tr> \n';
     var ignoreHonorsBool = $('#ignore_honors_cbx').prop('checked');
     //validate!
     if(!validateStrArr(str_arr,config_obj)){ return false;}
@@ -42,17 +42,14 @@ function createSSPreview(str_arr,config_obj){
         console.log(str_arr[i][0]);
         console.log(str_arr[i][1]);
         console.log(str_arr[i][2]);
-        console.log(str_arr[i][3]);
-        console.log(str_arr[i][4]);
-        console.log(str_arr[i][5] +':'+ (ignoreHonorsBool && str_arr[i][5] == 1));
-        console.log(str_arr[i][6]);
+
         console.log('--------------------------');
         // each page entry is iterated here
         if(ignoreHonorsBool && str_arr[i][5] == 1){   // bypass record if it's honors and the checkbox to ignore is checked
         } else {
             seleniumPreviewTable += '<tr><td>' + str_arr[i][0] + '</td>';
-            seleniumPreviewTable += '<td>' + str_arr[i][4] + '</td>';
-            seleniumPreviewTable += '<td>' + str_arr[i][6] + '</td></tr>\n';
+            seleniumPreviewTable += '<td>' + str_arr[i][1] + '</td>';
+            seleniumPreviewTable += '<td>' + str_arr[i][2] + '</td></tr>\n';
         }
 
     }
@@ -71,15 +68,7 @@ function validateStrArr(str_arr,config_obj){
         ||
         str_arr[0][1] != config_obj.reqcolnames[1]
         ||
-        str_arr[0][2] != config_obj.reqcolnames[2]
-        ||
-        str_arr[0][3] != config_obj.reqcolnames[3]
-        ||
-        str_arr[0][4] != config_obj.reqcolnames[4]
-        ||
-        str_arr[0][5] != config_obj.reqcolnames[5]
-        ||
-        str_arr[0][6] != config_obj.reqcolnames[6]){
+        str_arr[0][2] != config_obj.reqcolnames[2]){
         alert('row with column names required, please');
         return false;
     }  //Resource	Object ID	Contribution	Extra Credit	Term	Honors
