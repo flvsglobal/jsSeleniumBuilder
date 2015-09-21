@@ -13,14 +13,14 @@ function createSS(str_arr,config_obj){
         if(ignoreHonorsBool && str_arr[i][5] == 1){   // bypass record if it's honors and the checkbox to ignore is checked
         } else {
             // each page entry is iterated here
-            finalSeleniumString += jsSeleniumBuilder.makeCommand('waitForEditable','id=ctl03_BaseSelectionDetail1_BaseButtonAdd','') + '';
-            finalSeleniumString += jsSeleniumBuilder.makeCommand('click','id=ctl03_BaseSelectionDetail1_BaseButtonAdd','') + '\n';
-            finalSeleniumString += jsSeleniumBuilder.makeCommand('waitForValue','id=ctl03_BaseSelectionDetail1_ctl01_BaseTextBoxSegment','0') + '\n';
-            finalSeleniumString += jsSeleniumBuilder.makeCommand('type','id=ctl03_BaseSelectionDetail1_ctl01_BaseTextBoxDescription',str_arr[i][0]) + '\n';
-            finalSeleniumString += jsSeleniumBuilder.makeCommand('type','id=ctl03_BaseSelectionDetail1_ctl01_BaseTextBoxMinutes',str_arr[i][2]) + '\n';
-            finalSeleniumString += jsSeleniumBuilder.makeCommand('type','id=ctl03_BaseSelectionDetail1_ctl01_BaseTextBoxSegment',str_arr[i][1]) + '\n';
-            finalSeleniumString += jsSeleniumBuilder.makeCommand('click','id=ctl03_BaseSelectionDetail1_BaseButtonSave','') + '\n';
-            finalSeleniumString += jsSeleniumBuilder.makeCommand('waitForVisible','id=ctl03_BaseSelectionDetail1_baseValidationSummary','') + '';
+            finalSeleniumString += jsSeleniumBuilder.makeCommand('waitForEditable','id=ctl04_BaseSelectionDetail1_BaseButtonAdd','') + '';
+            finalSeleniumString += jsSeleniumBuilder.makeCommand('click','id=ctl04_BaseSelectionDetail1_BaseButtonAdd','') + '\n';
+            finalSeleniumString += jsSeleniumBuilder.makeCommand('waitForValue','id=ctl04_BaseSelectionDetail1_ctl01_BaseTextBoxSegment','0') + '\n';
+            finalSeleniumString += jsSeleniumBuilder.makeCommand('type','id=ctl04_BaseSelectionDetail1_ctl01_BaseTextBoxDescription',str_arr[i][0]) + '\n';
+            finalSeleniumString += jsSeleniumBuilder.makeCommand('type','id=ctl04_BaseSelectionDetail1_ctl01_BaseTextBoxMinutes',str_arr[i][2]) + '\n';
+            finalSeleniumString += jsSeleniumBuilder.makeCommand('type','id=ctl04_BaseSelectionDetail1_ctl01_BaseTextBoxSegment',str_arr[i][1]) + '\n';
+            finalSeleniumString += jsSeleniumBuilder.makeCommand('click','id=ctl04_BaseSelectionDetail1_BaseButtonSave','') + '\n';
+            finalSeleniumString += jsSeleniumBuilder.makeCommand('waitForVisible','id=ctl04_BaseSelectionDetail1_baseValidationSummary','') + '';
 
         }
 
